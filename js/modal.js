@@ -6,7 +6,7 @@ import { formatCellNumber, formatBirthday } from "./helpers.js";
  *  @returns {string} String containing modal html
  */
 const generateModal = (employee) =>
-    `<div class="modal-container">
+    `<div id="modal" class="modal-container">
         <div class="modal">
             <button type="button" id="modal-close-btn" class="modal-close-btn">
                 <strong>X</strong>
@@ -60,48 +60,89 @@ const generateModal = (employee) =>
     </div>`;
 
 /**
- *  1. Add modal for selected employee to page
- *  2. Add listener to close button that will remove modal html from page
- *  @param {Object} employee - Employee of clicked card
+ *  Add modal for selected employee to page
+ *  @param {Object} employeeData - Employee of clicked card
  */
-const addModal = (employee) => {
-    const modal = generateModal(employee);
-
-    document.getElementById("gallery").insertAdjacentHTML("afterend", modal);
+const addModal = (employeeData) => {
+    const modalHtml = generateModal(employeeData);
 
     document
-        .getElementById("modal-close-btn")
-        .addEventListener("click", (event) => {
-            event.currentTarget.parentNode.parentNode.remove();
-        });
+        .getElementById("gallery")
+        .insertAdjacentHTML("afterend", modalHtml);
+};
+
+/**
+ *  Handle close, previous & next button clicks
+ *  @param {Object} employeeData - Employee of clicked card
+ *  @param {Object} employeesData - Data of all employees
+ */
+const modalButtonsHandler = (employeeData, employeesData) => {
+    const modal = document.getElementById("modal");
+    const currentIndex = employeesData.findIndex(
+        (employee) => employee === employeeData
+    );
+
+    document.getElementById("modal-close-btn").addEventListener("click", () => {
+        modal.remove();
+    });
+
+    document.getElementById("modal-prev").addEventListener("click", () => {
+        modal.remove();
+
+        if (currentIndex === 0) {
+            addModal(employeesData[employeesData.length - 1]);
+            modalButtonsHandler(
+                employeesData[employeesData.length - 1],
+                employeesData
+            );
+        } else {
+            addModal(employeesData[currentIndex - 1]);
+            modalButtonsHandler(employeesData[currentIndex - 1], employeesData);
+        }
+    });
+
+    document.getElementById("modal-next").addEventListener("click", () => {
+        modal.remove();
+
+        if (currentIndex === employeesData.length - 1) {
+            addModal(employeesData[0]);
+            modalButtonsHandler(employeesData[0], employeesData);
+        } else {
+            addModal(employeesData[currentIndex + 1]);
+            modalButtonsHandler(employeesData[currentIndex + 1], employeesData);
+        }
+    });
 };
 
 /**
  *  Get employee data by filtering all employees by unique email address
  *  @param {HTMLElement} element - DOM Element of clicked card
- *  @param {Object} employees - Data of all employees
+ *  @param {Object} employeesData - Data of all employees
  *  @returns {Object} Data of selected employee
  */
-const getEmployeeData = (element, employees) => {
+const getEmployeeData = (element, employeesData) => {
     const email = element.querySelector(".js-email-hook").innerText;
-    const matchedData = employees.find((employee) => employee.email === email);
+    const matchedData = employeesData.find(
+        (employee) => employee.email === email
+    );
 
     return matchedData;
 };
 
 /**
  *  Handle modal functionality on interaction with employee cards
- *  @param {Object} employees - Parsed JSON results from fetch request
+ *  @param {Object} employeesData - Parsed JSON results from fetch request
  */
-export const modalHandler = (employees) => {
+export const modalHandler = (employeesData) => {
     document.querySelectorAll(".card").forEach((card) =>
         card.addEventListener("click", (event) => {
             const employeeData = getEmployeeData(
                 event.currentTarget,
-                employees
+                employeesData
             );
 
             addModal(employeeData);
+            modalButtonsHandler(employeeData, employeesData);
         })
     );
 };
