@@ -1,3 +1,5 @@
+import { formatCellNumber, formatBirthday } from "./helpers.js";
+
 /**
  *  Generate modal html of selected employee
  *  @param {Object} employee - Employee of clicked card
@@ -30,17 +32,18 @@ const generateModal = (employee) =>
                 <hr>
 
                 <p class="modal-text">
-                    ${employee.cell}
+                    ${formatCellNumber(employee)}
                 </p>
 
                 <p class="modal-text">
-                    ${employee.location.street.number} ${employee.location.street.name},
+                    ${employee.location.street.number}
+                    ${employee.location.street.name},
                     ${employee.location.city},
                     ${employee.location.postcode}
                 </p>
 
                 <p class="modal-text">
-                    Birthday: ${employee.dob.date}
+                    Birthday: ${formatBirthday(employee)}
                 </p>
             </div>
         </div>
