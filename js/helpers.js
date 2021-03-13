@@ -1,10 +1,20 @@
 /**
  *  Helper function for fetch requests
  *  @param {string} url - API endpoint to fetch data from
- *  @returns {Object} Parsed JSON from resolved promise of fetch request
+ *  @returns {Object} Parsed JSON of resolved promise
  */
 export const fetchJSON = (url) => {
     return fetch(url).then((response) => response.json());
+};
+
+/**
+ *  Helper function for appending
+ *  @param {HTMLElement} element - DOM Element
+ *  @param {string} position - Position relative to the element
+ *  @param {string} text - String to be parsed as HTML
+ */
+export const appendHtml = (element, position, text) => {
+    document.querySelector(element).insertAdjacentHTML(position, text);
 };
 
 /**
