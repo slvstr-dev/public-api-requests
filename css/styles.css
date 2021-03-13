@@ -1,14 +1,12 @@
-/* ===================================== 
-   Public API Request
-======================================== */
-
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+/* General */
+@import url("https://fonts.googleapis.com/css?family=Nunito");
 
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     width: 100%;
     max-width: 100%;
 }
@@ -16,57 +14,68 @@ html, body {
 body {
     font-family: "Nunito", sans-serif;
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+    min-height: 100vh;
 }
 
+/* Header */
 header {
     padding: 15px 5px 5px;
 }
 
 .header-inner-container {
-    max-width: 1180px;
+    max-width: 1200px;
     margin: auto;
 }
 
 header h1 {
-    font-size: 1.25em;
-    color: rgba(50, 50, 50, 0.9);
-    margin-top: 35px;
+    display: inline-block;
+    font-size: 1em;
+    color: #fff;
+    background: rgba(50, 50, 50, 0.9);
+    margin-top: 25px;
+    padding: 0.4rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
 }
 
+/* Search */
 .search-input {
     padding: 0.4rem 1rem;
-    border: 1px solid rgba(200, 200, 200, 0.9);
-    border-radius: 0.25rem 0 0 0.25rem ;
+    border: 1px solid #fff;
+    border-radius: 0.5rem 0 0 0.5rem;
     max-width: 20rem;
-    transition: .4s ease-out;
+    transition: 0.4s ease-out;
     outline: none;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
 }
 
-.search-input:active, .search-input:hover, .search-input:focus {
-    border: 1px solid rgba(50, 50, 50, 0.9);
+.search-input:active,
+.search-input:hover,
+.search-input:focus {
+    border: 1px solid rgba(200, 200, 200, 0.9);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
 }
 
 .search-submit {
     cursor: pointer;
     height: 33px;
-    background: rgba(245, 245, 245, 0.9);
-    border-radius: 0 0.25rem 0.25rem 0;
-    border: 1px solid rgba(200, 200, 200, 0.9);
-    transition: .4s ease-out;
+    background: #fff;
+    border-radius: 0 0.5rem 0.5rem 0;
+    border: 1px solid #fff;
+    transition: 0.4s ease-out;
     outline: none;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
 }
 
-.search-submit:active, .search-submit:hover, .search-submit:focus {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(50, 50, 50, 0.9);
+.search-submit:active,
+.search-submit:hover,
+.search-submit:focus {
+    border: 1px solid rgba(200, 200, 200, 0.9);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
 }
 
-
-/* ===================================== 
-   Gallery
-======================================== */
-
+/* Cards gallery */
 .gallery {
     display: flex;
     flex-direction: row;
@@ -76,7 +85,7 @@ header h1 {
     max-width: 1200px;
     margin: auto;
 }
-  
+
 .card {
     display: flex;
     flex-direction: row;
@@ -87,11 +96,17 @@ header h1 {
     max-width: 360px;
     margin: 10px 10px 20px;
     padding: 10px;
-    background: rgba(245, 245, 245, 0.9);
-    border-radius: 0.25em;
-    border: 1px solid rgba(50, 50, 50, 0.3);
-    transition: .4s ease-out;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 0.5em;
+    transition: 0.4s ease-out;
     overflow: hidden;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
+}
+
+.card:hover {
+    border: 1px solid rgba(200, 200, 200, 0.9);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
 }
 
 .card-img {
@@ -112,25 +127,21 @@ header h1 {
     font-size: 0.9em;
     color: rgba(50, 50, 50, 0.7);
     margin: 7px auto;
-    transition: .4s ease-out;
+    transition: 0.4s ease-out;
 }
 
 .cap {
     text-transform: capitalize;
 }
 
-
-/* ===================================== 
-   Modal
-======================================== */
-
+/* Modal */
 .modal-container {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.6);
 }
 
 .modal {
@@ -141,21 +152,30 @@ header h1 {
     margin: 10px auto auto;
     padding-bottom: 15px;
     background: rgba(255, 255, 255, 1);
-    border-radius: 0.25em;
-    border: 1px solid rgba(100, 100, 100, 0.3);
-    transition: .4s ease-out;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    transition: 0.4s ease-out;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
 }
 
 .modal-close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
+    height: 25px;
+    width: 25px;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.9);
-    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    background: rgba(50, 50, 50, 0.9);
     outline: none;
-    border-radius: 0.25em;
+    transition: 0.4s ease-out;
+    border-radius: 50%;
     border: 1px solid rgba(50, 50, 50, 0.3);
+}
+
+.modal-close-btn:hover {
+    color: rgba(50, 50, 50, 0.9);
+    background: #fff;
 }
 
 .modal-img {
@@ -183,39 +203,33 @@ header h1 {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-evenly;
-    width: 95%;
+    justify-content: space-between;
     max-width: 420px;
-    padding: 10px 15px 15px;;
     margin: 10px auto auto;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 0.25em;
-    border: 1px solid rgba(100, 100, 100, 0.3);
 }
-
 
 .modal-btn-container .btn {
     display: inline-block;
     cursor: pointer;
     font-size: 0.85em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.9);
     padding: 0.75em 1.5em;
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 0.35em;
-    transition: .4s ease-out;
+    color: #fff;
+    background: rgba(50, 50, 50, 0.9);
+    border: none;
+    border-radius: 0.5em;
+    transition: 0.4s ease-out;
     outline: none;
-  }
-  
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+}
 
-/* ===================================== 
-   Media Queries
-======================================== */
+.modal-btn-container .btn:hover {
+    color: rgba(50, 50, 50, 0.9);
+    background: #fff;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2);
+}
 
-/* ===================================== 
-   Tablet
-======================================== */
-
+/* Media queries */
 @media (min-width: 768px) {
     .header-inner-container {
         display: flex;
@@ -236,28 +250,5 @@ header h1 {
 
     .modal {
         margin-top: 100px;
-    }
-}
-
-
-/* ===================================== 
-   Desktop
-   Hover styles on desktop 
-======================================== */
-
-@media (min-width: 1024px) {
-
-    .card:hover {
-        background: rgba(255, 255, 255, 1);
-        border: 1px solid rgba(50, 50, 50, 0.9);
-    }
-
-    .card:hover .card-text {
-        color: rgba(25, 25, 25, 1); 
-    }
-
-    .btn:hover {
-        background: rgba(255, 255, 255, 1);
-        color: rgba(25, 25, 25, 1); 
     }
 }
