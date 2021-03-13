@@ -1,3 +1,5 @@
+import { appendHtml } from "./helpers.js";
+
 /**
  *  Generate cards html of all employees
  *  @param {Object} employees - Data of all employees
@@ -14,7 +16,7 @@ const generateCards = (employees) => {
                 </div>
 
                 <div class="card-info-container">
-                    <h3 id="${employee.name.first.toLowerCase()}" class="card-name cap">
+                    <h3 class="card-name cap">
                         ${employee.name.first} ${employee.name.last}
                     </h3>
 
@@ -35,9 +37,7 @@ const generateCards = (employees) => {
  *  @param {Object} employees - Parsed JSON results from fetch request
  */
 export const addCards = (employees) => {
-    const cards = generateCards(employees);
+    const cardsHtml = generateCards(employees).join("");
 
-    document
-        .getElementById("gallery")
-        .insertAdjacentHTML("beforeend", cards.join(""));
+    appendHtml("#gallery", "beforeend", cardsHtml);
 };

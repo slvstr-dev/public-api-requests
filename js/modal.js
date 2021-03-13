@@ -1,4 +1,29 @@
-import { formatCellNumber, formatBirthday } from "./helpers.js";
+import { formatCellNumber, formatBirthday, appendHtml } from "./helpers.js";
+
+/**
+ *  Get employee data by filtering all employees by unique email address
+ *  @param {HTMLElement} element - DOM Element of clicked card
+ *  @param {Object} employeesData - Data of all employees
+ *  @returns {Object} Data of selected employee
+ */
+const getEmployeeData = (element, employeesData) => {
+    const email = element.querySelector(".js-email-hook").innerText;
+    const matchedData = employeesData.find(
+        (employee) => employee.email === email
+    );
+
+    return matchedData;
+};
+
+/**
+ *  Add modal for selected employee to page
+ *  @param {Object} employeeData - Employee of clicked card
+ */
+const addModal = (employeeData) => {
+    const modalHtml = generateModal(employeeData);
+
+    appendHtml("#gallery", "afterend", modalHtml);
+};
 
 /**
  *  Generate modal html of selected employee
@@ -60,23 +85,11 @@ const generateModal = (employee) =>
     </div>`;
 
 /**
- *  Add modal for selected employee to page
- *  @param {Object} employeeData - Employee of clicked card
- */
-const addModal = (employeeData) => {
-    const modalHtml = generateModal(employeeData);
-
-    document
-        .getElementById("gallery")
-        .insertAdjacentHTML("afterend", modalHtml);
-};
-
-/**
  *  Handle close, previous & next button clicks
  *  @param {Object} employeeData - Employee of clicked card
  *  @param {Object} employeesData - Data of all employees
  */
-const modalButtonsHandler = (employeeData, employeesData) => {
+const handleButtons = (employeeData, employeesData) => {
     const modal = document.getElementById("modal");
     const currentIndex = employeesData.findIndex(
         (employee) => employee === employeeData
@@ -91,13 +104,13 @@ const modalButtonsHandler = (employeeData, employeesData) => {
 
         if (currentIndex === 0) {
             addModal(employeesData[employeesData.length - 1]);
-            modalButtonsHandler(
+            handleButtons(
                 employeesData[employeesData.length - 1],
                 employeesData
             );
         } else {
             addModal(employeesData[currentIndex - 1]);
-            modalButtonsHandler(employeesData[currentIndex - 1], employeesData);
+            handleButtons(employeesData[currentIndex - 1], employeesData);
         }
     });
 
@@ -106,34 +119,19 @@ const modalButtonsHandler = (employeeData, employeesData) => {
 
         if (currentIndex === employeesData.length - 1) {
             addModal(employeesData[0]);
-            modalButtonsHandler(employeesData[0], employeesData);
+            handleButtons(employeesData[0], employeesData);
         } else {
             addModal(employeesData[currentIndex + 1]);
-            modalButtonsHandler(employeesData[currentIndex + 1], employeesData);
+            handleButtons(employeesData[currentIndex + 1], employeesData);
         }
     });
 };
 
 /**
- *  Get employee data by filtering all employees by unique email address
- *  @param {HTMLElement} element - DOM Element of clicked card
- *  @param {Object} employeesData - Data of all employees
- *  @returns {Object} Data of selected employee
- */
-const getEmployeeData = (element, employeesData) => {
-    const email = element.querySelector(".js-email-hook").innerText;
-    const matchedData = employeesData.find(
-        (employee) => employee.email === email
-    );
-
-    return matchedData;
-};
-
-/**
- *  Handle modal functionality on interaction with employee cards
+ *  Initialize modal functionality on interaction with employee cards
  *  @param {Object} employeesData - Parsed JSON results from fetch request
  */
-export const modalHandler = (employeesData) => {
+export const initModal = (employeesData) => {
     document.querySelectorAll(".card").forEach((card) =>
         card.addEventListener("click", (event) => {
             const employeeData = getEmployeeData(
@@ -141,8 +139,9 @@ export const modalHandler = (employeesData) => {
                 employeesData
             );
 
-            addModal(employeeData);
-            modalButtonsHandler(employeeData, employeesData);
+            addModal(employeeData, employeesData);
+
+            handleButtons(employeeData, employeesData);
         })
     );
 };
