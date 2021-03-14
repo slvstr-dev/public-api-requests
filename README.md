@@ -21,3 +21,7 @@ Clicking a card will generate and open a modal with additional info about the se
 ## Customized styling
 
 The initial styling of the starter files have been customized to give the app a more modern and cleaner look. Changes contain: background gradient, box shadow, additional font-weights, additional hover effects & styling of buttons.
+
+## Run locally
+
+When running this app locally you should set up a local server (e.g. MAMP/WAMP) to avoid CORS errors.
