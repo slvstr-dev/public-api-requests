@@ -1,5 +1,3 @@
-import { appendHtml } from "./helpers.js";
-
 /**
  *  Generate cards html of all employees
  *  @param {Object} employees - Data of all employees
@@ -36,7 +34,7 @@ const generateCards = (employees) => {
  *  Generate html for cards of all employees
  *  @param {Object} employees - Parsed JSON results from fetch request
  */
-export const addCards = (employees) => {
+const addCards = (employees) => {
     const cardsHtml = generateCards(employees).join("");
 
     appendHtml("#gallery", "beforeend", cardsHtml);

@@ -1,5 +1,3 @@
-import { formatCellNumber, formatBirthday, appendHtml } from "./helpers.js";
-
 /**
  *  Get employee data by filtering all employees by unique email address
  *  @param {HTMLElement} element - DOM Element of clicked card
@@ -131,7 +129,7 @@ const handleButtons = (employeeData, employeesData) => {
  *  Initialize modal functionality on interaction with employee cards
  *  @param {Object} employeesData - Parsed JSON results from fetch request
  */
-export const initModal = (employeesData) => {
+const initModal = (employeesData) => {
     document.querySelectorAll(".card").forEach((card) =>
         card.addEventListener("click", (event) => {
             const employeeData = getEmployeeData(

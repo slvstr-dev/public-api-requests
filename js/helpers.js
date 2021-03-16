@@ -3,7 +3,7 @@
  *  @param {string} url - API endpoint to fetch data from
  *  @returns {Object} Parsed JSON of resolved promise
  */
-export const fetchJSON = (url) => {
+const fetchJSON = (url) => {
     return fetch(url).then((response) => response.json());
 };
 
@@ -13,7 +13,7 @@ export const fetchJSON = (url) => {
  *  @param {string} position - Position relative to the element
  *  @param {string} text - String to be parsed as HTML
  */
-export const appendHtml = (element, position, text) => {
+const appendHtml = (element, position, text) => {
     document.querySelector(element).insertAdjacentHTML(position, text);
 };
 
@@ -22,7 +22,7 @@ export const appendHtml = (element, position, text) => {
  *  @param {Object} employee - Employee's data
  *  @returns {string} US formatted cell number
  */
-export const formatCellNumber = (employee) => {
+const formatCellNumber = (employee) => {
     return employee.cell
         .replace(/\D*/g, "")
         .replace(/(\d{3})(\d{3})(\d+)/, "($1) $2-$3");
@@ -33,6 +33,6 @@ export const formatCellNumber = (employee) => {
  *  @param {Object} employee - Employee's data
  *  @returns {string} US formatted birthday
  */
-export const formatBirthday = (employee) => {
+const formatBirthday = (employee) => {
     return employee.dob.date.slice(0, 10).split("-").reverse().join("-");
 };

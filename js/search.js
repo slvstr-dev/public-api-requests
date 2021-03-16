@@ -1,5 +1,3 @@
-import { appendHtml } from "./helpers.js";
-
 /**
  *  Add search form to page
  */
@@ -56,7 +54,7 @@ const displaySearchResults = (request) => {
 /**
  *  Initialize search functionality on interaction with search input & submit
  */
-export const initSearch = () => {
+const initSearch = () => {
     addSearch();
     handleSearch();
 };
